@@ -1,5 +1,6 @@
 package jcliew.sb_kafka.controller;
 
+import jcliew.sb_kafka.model.ActivityEvent;
 import jcliew.sb_kafka.service.KafkaProducerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,5 +19,11 @@ public class MessageController {
     public ResponseEntity<String> publishMessage(@RequestBody String message) {
         producerService.sendMessage(message);
         return ResponseEntity.ok("Message sent to Kafka topic successfully");
+    }
+
+    @PostMapping("/publish/event")
+    public ResponseEntity<String> publishMessage(@RequestBody ActivityEvent event) {
+        producerService.sendMessage(event);
+        return ResponseEntity.ok("Event sent to Kafka topic successfully");
     }
 }
