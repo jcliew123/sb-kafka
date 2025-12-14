@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: spring-kafka-project
+  kafka:
+    # Broker connection URL
+    bootstrap-servers: localhost:9092
+
+    # Producer configuration
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+    # Consumer configuration
+    consumer:
+      group-id: my-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "jcliew.sb_kafka.model"
+
+---
+# Custom property for the topic name
+my:
+  kafka:
+    topic: user-activity-topic
